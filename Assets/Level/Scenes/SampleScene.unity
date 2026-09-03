@@ -344,6 +344,66 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2595149641867202818, guid: 761af92f6de353547bc9ef8b2a0d9eef, type: 3}
   m_PrefabInstance: {fileID: 385453892}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &246958244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 246958246}
+  - component: {fileID: 246958245}
+  m_Layer: 0
+  m_Name: MobileInputController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &246958245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246958244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05750ec0d06f1c348a7d1af9afa96e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MobileInputController
+  _swipeThreshold: 50
+  OnSwipeUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1995002999}
+        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &246958246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246958244}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.24664, y: -0.2728, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &248503880 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1808826081858901657, guid: 43f30dcd9d9b4164aa223e9883855d61, type: 3}
@@ -1514,6 +1574,8 @@ MonoBehaviour:
   _bg2: {fileID: 347286649}
   _scrollSpeed: 1.5
   _overlapPadding: 0.05
+  jumpScrollSpeed: 4
+  _acceleration: 10
 --- !u!4 &559795616 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7379869227429070146, guid: d2a1697887cf422438ef569a8f57aca2, type: 3}
@@ -5084,6 +5146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController
   _jumpForce: 7
+  _jumpSpeed: 1
   _animator: {fileID: 0}
 --- !u!95 &1995003000
 Animator:
@@ -5550,3 +5613,4 @@ SceneRoots:
   - {fileID: 347286649}
   - {fileID: 1767060568}
   - {fileID: 308105378}
+  - {fileID: 246958246}

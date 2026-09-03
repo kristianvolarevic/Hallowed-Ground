@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class CharacterController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class CharacterController : MonoBehaviour
     private bool _canDoubleJump = false;
     private bool _isGrounded;
     private bool _isDead = false;
+
+    public static event Action<bool> OnJumpStateChanged;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,23 +32,30 @@ public class CharacterController : MonoBehaviour
 
         if (_isJumpRequested && _isGrounded)
         {
-            _rigidbody.linearVelocityY = _jumpForce;
-            _rigidbody.linearVelocityX = _jumpSpeed;
-            _isJumpRequested = false;
+            ExecuteJump();
             _isGrounded = false;
             _canDoubleJump = true;
 
-            _animator.SetBool("isJumping", !_isGrounded);
+
         }
         else if (_isJumpRequested && _canDoubleJump)
         {
-            _rigidbody.linearVelocityY = _jumpForce;
-            _rigidbody.linearVelocityX = _jumpSpeed;
-            _isJumpRequested = false;
+            ExecuteJump();
             _canDoubleJump = false;
 
-            _animator.SetBool("isJumping", !_isGrounded);
+
         }
+        _animator.SetBool("isJumping", !_isGrounded);
+
+
+    }
+
+    private void ExecuteJump()
+    {
+        _rigidbody.linearVelocityY = _jumpForce;
+        _isJumpRequested = false;
+
+        OnJumpStateChanged?.Invoke(true);
     }
 
     public void Jump()
@@ -61,6 +71,7 @@ public class CharacterController : MonoBehaviour
         _isGrounded = true;
         _animator.SetBool("isJumping", !_isGrounded);
         _canDoubleJump = false;
+        OnJumpStateChanged?.Invoke(false);
     }
 
     public void Die()
