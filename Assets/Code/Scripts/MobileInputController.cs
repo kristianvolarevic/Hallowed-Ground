@@ -4,7 +4,10 @@ using UnityEngine.InputSystem;
 
 public class MobileInputController : MonoBehaviour
 {
+    [Header("Touch Settings")]
     [SerializeField] private float _swipeThreshold = 50f; // Minimum distance for a swipe to be recognized
+
+    [Header("Events")]
     [SerializeField] private UnityEvent OnSwipeUp;
 
     private Vector2 _touchStartPosition;
@@ -20,6 +23,7 @@ public class MobileInputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check for touch input
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
         {
             var touch = Touchscreen.current.primaryTouch;
@@ -35,6 +39,7 @@ public class MobileInputController : MonoBehaviour
                 _isSwiping = false;
             }
         }
+        // Check for mouse input (for testing in the editor)
         else if (Mouse.current != null)
         {
             if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -55,6 +60,7 @@ public class MobileInputController : MonoBehaviour
     {
         Vector2 swipeVector = _touchEndPosition - _touchStartPosition;
 
+        // Check if the swipe distance exceeds the threshold
         if (swipeVector.magnitude >= _swipeThreshold)
         {
             Vector2 direction = swipeVector.normalized;

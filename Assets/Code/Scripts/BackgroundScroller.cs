@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class BackgroundScroller : MonoBehaviour
 {
+    [Header("Background References")]
     [SerializeField] private Transform _bg1, _bg2;
+
+    [Header("Scroll Settings")]
     [SerializeField] private float _scrollSpeed = 5f, _overlapPadding = 0.05f, jumpScrollSpeed = 10f, _acceleration = 2f;
 
     private Camera _cam;

@@ -3,8 +3,10 @@ using System;
 
 public class CharacterController : MonoBehaviour
 {
-    [SerializeField] private float _jumpForce = 5f;
-    [SerializeField] private float _jumpSpeed = 1f;
+    [Header("Jump Settings")]
+    [SerializeField] private float _jumpForce = 5f, _jumpSpeed = 1f;
+
+    [Header("References")]
     [SerializeField] private Animator _animator;
 
     private Rigidbody2D _rigidbody;
@@ -28,23 +30,24 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Update the animator with the current vertical velocity
         _animator.SetFloat("yVelocity", _rigidbody.linearVelocityY);
 
         if (_isJumpRequested && _isGrounded)
         {
+            // Execute the jump
             ExecuteJump();
             _isGrounded = false;
             _canDoubleJump = true;
-
-
         }
         else if (_isJumpRequested && _canDoubleJump)
         {
+            // Execute the double jump
             ExecuteJump();
             _canDoubleJump = false;
-
-
         }
+
+        // Update the animator with the jump state
         _animator.SetBool("isJumping", !_isGrounded);
 
 
@@ -68,6 +71,7 @@ public class CharacterController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        // Check if the character has landed on the ground
         _isGrounded = true;
         _animator.SetBool("isJumping", !_isGrounded);
         _canDoubleJump = false;
@@ -76,7 +80,7 @@ public class CharacterController : MonoBehaviour
 
     public void Die()
     {
-        if (_isDead) return;
+        if (_isDead) return; // Prevent multiple death triggers
         _isDead = true;
 
         Debug.Log("Character has died.");
