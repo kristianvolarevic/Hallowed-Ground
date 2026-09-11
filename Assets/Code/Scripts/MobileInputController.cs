@@ -24,7 +24,7 @@ public class MobileInputController : MonoBehaviour
     void Update()
     {
         // Check for touch input
-        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+        if (Touchscreen.current != null)
         {
             var touch = Touchscreen.current.primaryTouch;
             if (touch.press.wasPressedThisFrame)
